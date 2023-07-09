@@ -6,13 +6,13 @@ import {
   Image,
   FlatList,
   Modal,
-  Alert,
 } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import Images from "../Images/Images";
 import Tasks from "../components/Tasks";
 import { tempData } from "../components/TempData";
 import Icon from "react-native-vector-icons/Entypo";
+import AddListModal from "../components/AddListModal";
 
 const ToDo = () => {
   const [name, setName] = useState("");
@@ -57,9 +57,7 @@ const ToDo = () => {
         visible={addTodoVisible}
         onRequestClose={() => setAddTodoVisible(!addTodoVisible)}
       >
-        <View>
-          <Text>I'm a modal</Text>
-        </View>
+      <AddListModal closeModal={() => setAddTodoVisible(!addTodoVisible)}/>
       </Modal>
       <View className="flex flex-col mt-12 pl-2">
         <View className="flex flex-row">
