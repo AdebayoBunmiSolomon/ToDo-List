@@ -4,7 +4,8 @@ import {
   Text,
   SafeAreaView,
   TouchableOpacity,
-  FlatList,
+  KeyboardAvoidingView,
+  TextInput,
 } from "react-native";
 import Icon from "react-native-vector-icons/AntDesign";
 import SubTodoList from "./SubTodoList";
@@ -16,7 +17,6 @@ const TodoListModal = (props) => {
 
   const completed = todos.filter((todo) => todo.completed).length;
   const taskCount = todos.length;
-
 
   return (
     <SafeAreaView className="flex-1" behavior="padding">
@@ -33,8 +33,25 @@ const TodoListModal = (props) => {
           </Text>
         </View>
       </View>
-      <View className="bg-amber-400">
-        <SubTodoList todos={todos}/>
+      <View>
+        <SubTodoList todos={todos} />
+        <KeyboardAvoidingView behavior="padding">
+          <View className="flex flex-row space-x-[-14px]">
+            <View className="px-5">
+              <TextInput className="h-[48px] border border-slate-400 rounded-md w-[270px] pl-2" />
+            </View>
+            <View>
+              <TouchableOpacity
+                style={{ backgroundColor: color }}
+                className="justify-center items-center h-[48px] w-[50px] rounded-md"
+              >
+                <Text className="text-white">
+                  <Icon name="plus" size={16} />
+                </Text>
+              </TouchableOpacity>
+            </View>
+          </View>
+        </KeyboardAvoidingView>
       </View>
     </SafeAreaView>
   );

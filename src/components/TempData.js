@@ -46,6 +46,10 @@ export const tempData = [
         title: "Take dog for a walk",
         completed: true,
       },
+      {
+        title: "Cook Jollof Rice",
+        completed: false,
+      }
     ],
   },
   {

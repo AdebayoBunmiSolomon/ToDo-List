@@ -9,7 +9,7 @@ const Stack = createNativeStackNavigator();
 const StackNavigator = () => {
   return (
     <Stack.Navigator screenOptions={{ headerShown: false }}>
-      {/* <Stack.Screen name="Splash" component={Splash} />
+      <Stack.Screen name="Splash" component={Splash} />
       <Stack.Screen
         name="Main"
         component={Main}
@@ -19,7 +19,7 @@ const StackNavigator = () => {
           animation: "slide_from_right",
           gestureEnabled: false,
         }}
-      /> */}
+      />
       <Stack.Screen
         name="ToDo"
         component={ToDo}
