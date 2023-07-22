@@ -63,7 +63,7 @@ const Main = ({ navigation }) => {
       // setCheck(check);
       removeUserData();
     }
-    console.log(signedIn + "Stored name is " + storeName);
+    //console.log(signedIn + "Stored name is " + storeName);
   };
 
   useEffect(() => {

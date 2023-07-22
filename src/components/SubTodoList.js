@@ -1,11 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import { View, Text, FlatList, TouchableOpacity } from "react-native";
 import Icon from "react-native-vector-icons/FontAwesome";
 
 const SubTodoList = ({ todos }) => {
   const todoList = todos;
-  const completed = todoList.map((completedTodos) => completedTodos.completed);
-  console.log(completed);
+  const [textColor, setTextColor] = useState("text-slate-400");
+
   return (
     <View className="px-5 py-5 h-[300px]">
       <FlatList
@@ -16,18 +16,21 @@ const SubTodoList = ({ todos }) => {
             <TouchableOpacity>
               <Text className="text-slate-400 p-[16px]">
                 <Icon
-                  name={todoList.completed === true ? "square-o" : "square"}
+                  name={item.completed === true ? "square" : "square-o"}
                   size={24}
                   style={{ width: 32 }}
                 />
               </Text>
             </TouchableOpacity>
             <Text
-              className="p-[16px] font-bold text-[16px]"
+              className={
+                item.completed === true
+                  ? `p-[16px] font-bold text-[16px] text-slate-400`
+                  : `p-[16px] font-bold text-[16px] text-black`
+              }
               style={{
-                textDecorationLine: todoList.completed
-                  ? "line-through"
-                  : "none",
+                textDecorationLine:
+                  item.completed === true ? "line-through" : "none",
               }}
             >
               {item.title}
