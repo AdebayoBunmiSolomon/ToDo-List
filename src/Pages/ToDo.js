@@ -1,18 +1,12 @@
 import React, { useEffect, useState } from "react";
-import {
-  View,
-  Text,
-  TouchableOpacity,
-  Image,
-  FlatList,
-  Modal,
-} from "react-native";
+import { View, Text, TouchableOpacity, Image, Modal } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import Images from "../Images/Images";
-import Tasks from "../components/Tasks";
-import { tempData } from "../components/TempData";
 import Icon from "react-native-vector-icons/Entypo";
+import FeatherIcon from "react-native-vector-icons/Feather";
 import AddListModal from "../components/AddListModal";
+import CheckListModal from "../components/CheckListModal";
+import SettingsModal from "../components/SettingsModal";
 
 const ToDo = () => {
   const [name, setName] = useState("");
@@ -20,6 +14,8 @@ const ToDo = () => {
   let userName;
 
   const [addTodoVisible, setAddTodoVisible] = useState(false);
+  const [checkListVisible, setCheckListVisible] = useState(false);
+  const [settingsVisible, setSettingsVisible] = useState(false);
 
   const date = new Date();
   const curHrs = date.getHours();
@@ -41,8 +37,12 @@ const ToDo = () => {
   const getUserData = async () => {
     userName = await AsyncStorage.getItem("name");
     storedUserName = JSON.parse(userName);
-    setName(storedUserName);
-    console.log(storedUserName);
+    if (storedUserName === null) {
+      setName("empty name or null set");
+    } else {
+      setName(storedUserName);
+      console.log(storedUserName);
+    }
   };
 
   useEffect(() => {
@@ -52,12 +52,33 @@ const ToDo = () => {
 
   return (
     <View className="flex-1 bg-white">
+      {/*Add list modal*/}
       <Modal
         animationType="slide"
         visible={addTodoVisible}
         onRequestClose={() => setAddTodoVisible(!addTodoVisible)}
       >
-      <AddListModal closeModal={() => setAddTodoVisible(!addTodoVisible)}/>
+        <AddListModal closeModal={() => setAddTodoVisible(!addTodoVisible)} />
+      </Modal>
+      {/*Check list modal*/}
+      <Modal
+        animationType="slide"
+        visible={checkListVisible}
+        onRequestClose={() => setCheckListVisible(!checkListVisible)}
+      >
+        <CheckListModal
+          closeModal={() => setCheckListVisible(!checkListVisible)}
+        />
+      </Modal>
+      {/*Settings modal*/}
+      <Modal
+        animationType="slide"
+        visible={settingsVisible}
+        onRequestClose={() => setSettingsVisible(!settingsVisible)}
+      >
+        <SettingsModal
+          closeModal={() => setSettingsVisible(!settingsVisible)}
+        />
       </Modal>
       <View className="flex flex-col mt-12 pl-2">
         <View className="flex flex-row">
@@ -74,30 +95,52 @@ const ToDo = () => {
           <Text className="font-medium text-sm text-slate-400">{name}</Text>
         </Text>
       </View>
-      {/* Plus icon and addlist */}
-      <View className="flex flex-col sapce-y-2 mt-28">
+      {/* Icons set for each module*/}
+      <View className="flex flex-col space-y-6 mt-28">
+        {/*add list */}
         <View className="flex flex-row justify-center">
           <TouchableOpacity
-            className="border border-amber-400 p-3 rounded-md duration-700"
+            className="border border-indigo-600 p-3 rounded-md duration-700"
             onPress={() => setAddTodoVisible(!addTodoVisible)}
           >
-            <Text className="text-amber-400">
-              <Icon name="circle-with-plus" size={22} />
+            <Text className="text-indigo-600">
+              <Icon name="circle-with-plus" size={40} />
             </Text>
           </TouchableOpacity>
         </View>
         <View className="flex flex-row justify-center">
-          <Text className="font-medium text-sm text-slate-400">Add List</Text>
+          <Text className="font-medium text-sm text-indigo-600">Add list</Text>
         </View>
-      </View>
-      <View className="h-72 pl-0 mt-4">
-        <FlatList
-          data={tempData}
-          keyExtractor={(items) => items.name}
-          horizontal={true}
-          showsHorizontalScrollIndicator={false}
-          renderItem={({ item }) => <Tasks list={item} />}
-        />
+
+        {/*check list */}
+        <View className="flex flex-row justify-center">
+          <TouchableOpacity
+            className="border border-sky-500 p-3 rounded-md duration-700"
+            onPress={() => setCheckListVisible(!checkListVisible)}
+          >
+            <Text className="text-sky-500">
+              <Icon name="edit" size={40} />
+            </Text>
+          </TouchableOpacity>
+        </View>
+        <View className="flex flex-row justify-center">
+          <Text className="font-medium text-sm text-sky-500">Check list</Text>
+        </View>
+
+        {/*settings */}
+        <View className="flex flex-row justify-center">
+          <TouchableOpacity
+            className="border border-purple-700 p-3 rounded-md duration-700"
+            onPress={() => setSettingsVisible(!settingsVisible)}
+          >
+            <Text className="text-purple-700">
+              <FeatherIcon name="settings" size={40} />
+            </Text>
+          </TouchableOpacity>
+        </View>
+        <View className="flex flex-row justify-center">
+          <Text className="font-medium text-sm text-purple-700">Settings</Text>
+        </View>
       </View>
     </View>
   );

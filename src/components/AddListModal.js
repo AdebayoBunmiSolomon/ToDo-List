@@ -1,13 +1,14 @@
 import React, { useState } from "react";
-import { tempData } from "./TempData";
 import {
   View,
   Text,
   TouchableOpacity,
   KeyboardAvoidingView,
   TextInput,
+  Alert,
 } from "react-native";
 import Icon from "react-native-vector-icons/AntDesign";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const AddListModal = (props) => {
   const [listName, setListName] = useState("");
@@ -22,14 +23,47 @@ const AddListModal = (props) => {
   ];
   const [color, setColor] = useState(backGroundColors[0]);
 
-  const createTodo = () => {
-    tempData.push({
-      name: listName,
+  //set data format to store in async storage
+  const todoList = [
+    {
+      title: listName,
       color: color,
-      todos: [],
-    });
-    setListName("");
-    props.closeModal();
+    },
+  ];
+
+  const addTodo = async () => {
+    //await AsyncStorage.clear();
+
+    //get todo data if exist and create todo
+    const getTodo = await AsyncStorage.getItem("todo");
+    const getTodoData = JSON.parse(getTodo);
+
+    //To create first todo
+    if (getTodoData === null) {
+      await AsyncStorage.setItem("todo", JSON.stringify(todoList));
+      Alert.alert("MeTodo", "First todo added successfully", [
+        { text: "OK", onPress: () => console.log("OK Pressed") },
+      ]);
+      setListName("");
+      console.log("First todo added successfully");
+    } else {
+      //Add to the existing todo array object gotten
+      const getTodoDataFormat = getTodoData;
+      getTodoDataFormat.push({
+        color: color,
+        title: listName,
+      });
+      //clear storage array object and new todo array object to storage
+      await AsyncStorage.setItem("todo", JSON.stringify(getTodoDataFormat));
+      const newGetTodo = await AsyncStorage.getItem("todo");
+      const newGetTodoData = JSON.parse(newGetTodo);
+      console.log(newGetTodoData);
+      Alert.alert("MeTodo", "New todo added successfully", [
+        { text: "OK", onPress: () => console.log("OK Pressed") },
+      ]);
+      setListName("");
+      console.log("New todo added successfully");
+    }
   };
 
   return (
@@ -62,7 +96,7 @@ const AddListModal = (props) => {
         <TouchableOpacity
           className=" h-11 w-[300px] rounded-lg duration-500 justify-center items-center mt-4"
           style={[{ backgroundColor: color }]}
-          onPress={createTodo}
+          onPress={addTodo}
         >
           <Text className=" text-white font-medium text-base">
             Create Todo <Icon name="pluscircle" size={15} />
