@@ -48,7 +48,7 @@ const AddListModal = (props) => {
       setListName("");
       console.log("First todo added successfully");
     } else {
-      //Add to the existing todo array object gotten
+      //Validate if listname is empty or not
       if (!listName.trim()) {
         Alert.alert("MeTodo", "Empty list name");
       } else {
