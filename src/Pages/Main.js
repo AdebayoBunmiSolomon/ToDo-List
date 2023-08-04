@@ -78,6 +78,11 @@ const Main = ({ navigation }) => {
         Alert.alert("Note", "Name is not saved.");
         removeUserData();
         getUserData();
+        navigation.dispatch(
+          StackActions.replace("ToDo", {
+            user: "jane",
+          })
+        );
       } else {
         Alert.alert("Note", "Name is saved.");
         storeUserData();
@@ -101,65 +106,64 @@ const Main = ({ navigation }) => {
   // };
 
   return (
-    <KeyboardAvoidingView className="flex-1 bg-white">
+    <KeyboardAvoidingView className='flex-1 bg-white'>
       <TouchableWithoutFeedback onPress={dismissKeyBoard}>
         <View>
           {/* To-do and created by */}
-          <View className="flex flex-col mt-12 ml-2">
+          <View className='flex flex-col mt-12 ml-2'>
             <View>
-              <Text className="text-slate-400 font-medium text-3xl">
-                My TO<Text className="text-amber-400">-DO</Text>
+              <Text className='text-slate-400 font-medium text-3xl'>
+                My TO<Text className='text-amber-400'>-DO</Text>
               </Text>
             </View>
             <View>
-              <Text className="text-amber-500 font-medium text-sm italic">
+              <Text className='text-amber-500 font-medium text-sm italic'>
                 Created By Bunmi
               </Text>
             </View>
           </View>
-          <View className="flex flex-row justify-center rounded-full">
+          <View className='flex flex-row justify-center rounded-full'>
             <Image
               source={Images.img2}
-              className="h-[100px] w-[100px] rounded-full mt-24"
+              className='h-[100px] w-[100px] rounded-full mt-24'
             />
           </View>
           {/* Name, text input, button, and year opf creation */}
-          <View className="flex flex-col mt-20 space-y-1">
-            <View className="flex flex-row pl-5">
-              <Text className="font-medium text-sm text-amber-400">
+          <View className='flex flex-col mt-20 space-y-1'>
+            <View className='flex flex-row pl-5'>
+              <Text className='font-medium text-sm text-amber-400'>
                 Enter a name to continue...
               </Text>
             </View>
-            <View className="flex flex-row justify-center">
+            <View className='flex flex-row justify-center'>
               <TextInput
-                placeholder="Enter here"
-                className="placeholder:italic placeholder:text-slate-400 block bg-white w-[90%] border border-slate-300 rounded-md py-2 pl-2 pr-3 shadow-sm focus:outline-none focus:border-amber-400 focus:ring-amber-400 focus:ring-1 sm:text-sm"
+                placeholder='Enter here'
+                className='placeholder:italic placeholder:text-slate-400 block bg-white w-[90%] border border-slate-300 rounded-md py-2 pl-2 pr-3 shadow-sm focus:outline-none focus:border-amber-400 focus:ring-amber-400 focus:ring-1 sm:text-sm'
                 onFocus={nameFocus}
                 onBlur={nameBlur}
                 value={name}
                 onChangeText={(name) => setName(name)}
               />
             </View>
-            <View className="flex flex-row justify-start pt-2">
+            <View className='flex flex-row justify-start pt-2'>
               <CheckBox
-                title="Stay signed in?"
-                checkedColor="#ffbf00"
+                title='Stay signed in?'
+                checkedColor='#ffbf00'
                 checked={check}
                 onPress={() => setCheck(!check)}
               />
             </View>
-            <View className="flex flex-row justify-center">
+            <View className='flex flex-row justify-center'>
               <TouchableOpacity
-                className="bg-amber-400 h-11 w-[90%] rounded-lg duration-500 justify-center items-center"
-                onPress={clickProceed}
-              >
-                <Text className=" text-white font-medium text-base">
-                  Proceed <Icon name="arrow-forward-circle" size={18} />
+                className='bg-amber-400 h-11 w-[90%] rounded-lg duration-500 justify-center items-center'
+                onPress={clickProceed}>
+                <Text className=' text-white font-medium text-base'>
+                  Proceed <Icon name='arrow-forward-circle' size={18} />
                 </Text>
               </TouchableOpacity>
             </View>
-            <View className="flex flex-row justify-end pr-5 pt-1">
-              <Text className="text-black italic text-xs font-medium">
+            <View className='flex flex-row justify-end pr-5 pt-1'>
+              <Text className='text-black italic text-xs font-medium'>
                 Copyright &copy;, {currentYear} {JSON.stringify(signedIn)}
               </Text>
             </View>

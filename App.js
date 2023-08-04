@@ -3,15 +3,16 @@ import Splash from "./src/Pages/Splash";
 import ToDo from "./src/Pages/ToDo";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { SSRProvider } from "@react-aria/ssr";
 
 const Stack = createNativeStackNavigator();
 
 const StackNavigator = () => {
   return (
     <Stack.Navigator screenOptions={{ headerShown: false }}>
-      <Stack.Screen name="Splash" component={Splash} />
+      <Stack.Screen name='Splash' component={Splash} />
       <Stack.Screen
-        name="Main"
+        name='Main'
         component={Main}
         options={{
           presentation: "modal",
@@ -21,7 +22,7 @@ const StackNavigator = () => {
         }}
       />
       <Stack.Screen
-        name="ToDo"
+        name='ToDo'
         component={ToDo}
         options={{
           presentation: "modal",
@@ -36,8 +37,10 @@ const StackNavigator = () => {
 
 export default function App() {
   return (
-    <NavigationContainer>
-      <StackNavigator />
-    </NavigationContainer>
+    <SSRProvider>
+      <NavigationContainer>
+        <StackNavigator />
+      </NavigationContainer>
+    </SSRProvider>
   );
 }
