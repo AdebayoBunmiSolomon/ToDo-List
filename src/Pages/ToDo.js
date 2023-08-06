@@ -10,12 +10,11 @@ import SettingsModal from "../components/SettingsModal";
 
 const ToDo = () => {
   const [name, setName] = useState("");
-  let storedUserName;
-  let userName;
 
   const [addTodoVisible, setAddTodoVisible] = useState(false);
   const [checkListVisible, setCheckListVisible] = useState(false);
   const [settingsVisible, setSettingsVisible] = useState(false);
+  const [image, setImage] = useState(null);
 
   const date = new Date();
   const curHrs = date.getHours();
@@ -23,25 +22,27 @@ const ToDo = () => {
 
   const getGreeting = () => {
     if (curHrs >= 0 && curHrs < 12) {
-      // console.log("Good Morning");
       setGreeting("Good Morning");
     } else if (curHrs >= 12 && curHrs < 16) {
-      // console.log("Good Afternon");
       setGreeting("Good Afternoon");
     } else if (curHrs >= 16) {
-      // console.log("Good Evening");
       setGreeting("Good Evening");
     }
   };
 
   const getUserData = async () => {
-    userName = await AsyncStorage.getItem("name");
-    storedUserName = JSON.parse(userName);
-    if (storedUserName === null) {
-      setName("empty name or null set");
+    const gottenUserData = await AsyncStorage.getItem("userData");
+    const parsedUserData = JSON.parse(gottenUserData);
+    let userName;
+    let userImage;
+    if (parsedUserData === null) {
+      setName("please set up a name");
+      setImage(null);
     } else {
-      setName(storedUserName);
-      console.log(storedUserName);
+      userName = parsedUserData.userName;
+      userImage = parsedUserData.userImage;
+      setName(userName);
+      setImage(userImage);
     }
   };
 
@@ -80,20 +81,35 @@ const ToDo = () => {
           closeModal={() => setSettingsVisible(!settingsVisible)}
         />
       </Modal>
-      <View className="flex flex-col mt-12 pl-2">
-        <View className="flex flex-row">
-          <Text className="font-medium text-2xl">
-            <Text className="font-bold text-2xl">Todo</Text> Lists{" "}
-          </Text>
-          <Image
-            source={Images.img2}
-            className="h-[30px] w-[30px] rounded-full"
-          />
+      <View className="flex flex-row mt-12 pl-2 items-center">
+        <View>
+          {image === null ? (
+            <Image
+              source={Images.img4}
+              className="h-[70px] w-[70px] rounded-full"
+            />
+          ) : (
+            <Image
+              source={{ uri: image }}
+              className="h-[70px] w-[70px] rounded-full"
+            />
+          )}
         </View>
-        <Text className="font-medium text-sm text-amber-400">
-          {greeting},{" "}
-          <Text className="font-medium text-sm text-slate-400">{name}</Text>
-        </Text>
+        <View className="flex flex-col">
+          <View className="flex flex-row">
+            <Text className="font-medium text-2xl">
+              <Text className="font-bold text-2xl">Todo</Text> Lists{" "}
+            </Text>
+            <Image
+              source={Images.img1}
+              className="h-[30px] w-[30px] rounded-full"
+            />
+          </View>
+          <Text className="font-medium text-sm text-amber-400">
+            {greeting},{" "}
+            <Text className="font-medium text-sm text-slate-400">{name}</Text>
+          </Text>
+        </View>
       </View>
       {/* Icons set for each module*/}
       <View className="flex flex-col space-y-6 mt-28">

@@ -11,10 +11,9 @@ const Splash = ({ navigation }) => {
 
   const getUserData = async () => {
     //AsyncStorage.clear();
-    const user = await AsyncStorage.getItem("name");
-    const result = JSON.parse(user);
-    console.log(result);
-    if (result === null) {
+    const gottenUserData = await AsyncStorage.getItem("userData");
+    const parsedUserData = JSON.parse(gottenUserData);
+    if (parsedUserData === null) {
       navigation.dispatch(
         StackActions.replace("Main", {
           user: "jane",
@@ -39,11 +38,6 @@ const Splash = ({ navigation }) => {
       } else if (count === 15) {
         setImgClass("text-slate-400");
         setCount(0);
-        // navigation.dispatch(
-        //   StackActions.replace("Main", {
-        //     user: "jane",
-        //   })
-        // );
         getUserData();
       }
     }, 1100);

@@ -45,10 +45,11 @@ const TasksList = ({ Tasks, Length }) => {
     });
     return (
       <TouchableOpacity onPress={deleteItem}>
-        <View className='justify-center items-center bg-red-400 w-[100px] mt-3 h-20 rounded-r-lg'>
+        <View className="justify-center items-center bg-red-400 w-[100px] mt-3 h-20 rounded-lg">
           <Animated.Text
-            className='text-white text-sm font-bold'
-            style={{ transform: [{ scale: scale }] }}>
+            className="text-white text-sm font-bold"
+            style={{ transform: [{ scale: scale }] }}
+          >
             Delete
           </Animated.Text>
         </View>
@@ -58,12 +59,12 @@ const TasksList = ({ Tasks, Length }) => {
 
   return (
     <View>
-      <View className='ml-2 '>
-        <Text className='font-bold text-xl text-black'>
+      <View className="ml-2 ">
+        <Text className="font-bold text-xl text-black">
           Total todo: {todoLength}
         </Text>
       </View>
-      <View className='h-[650px] w-[95vw] mt-2 ml-2'>
+      <View className="h-[650px] w-[95vw] mt-2 ml-2">
         <FlatList
           renderScrollComponent={false}
           data={todoData}
@@ -72,29 +73,32 @@ const TasksList = ({ Tasks, Length }) => {
             <GestureHandlerRootView>
               <Swipeable renderLeftActions={leftSwipe}>
                 <TouchableOpacity
-                  className='flex flex-row pt-2 mt-3 h-20 rounded-xl'
+                  className="flex flex-row pt-2 mt-3 h-20 rounded-xl"
                   style={[{ backgroundColor: item.color }]}
                   onPress={(e) => {
                     e.preventDefault();
                     setIsTodoTitle(String(item.title));
                     setItemColor(String(item.color));
                     setIsSelected(true);
-                  }}>
+                  }}
+                >
                   <View>
                     <TouchableOpacity
-                      className='h-10 w-10 rounded-lg justify-center items-center bg-slate-50 ml-2 mt-3'
+                      className="h-10 w-10 rounded-lg justify-center items-center bg-slate-50 ml-2 mt-3"
                       onPress={() => {
                         setItemIndex(index);
-                      }}>
+                      }}
+                    >
                       <Text style={[{ color: item.color }]}>
-                        <Icon name='notebook-minus' size={32} />
+                        <Icon name="notebook-minus" size={32} />
                       </Text>
                     </TouchableOpacity>
                   </View>
                   <View>
                     <Text
-                      className='pt-5 text-[20px] font-medium pl-2'
-                      style={[{ color: "white" }]}>
+                      className="pt-5 text-[20px] font-medium pl-2"
+                      style={[{ color: "white" }]}
+                    >
                       {truncateText(String(item.title))}
                     </Text>
                   </View>
@@ -108,8 +112,9 @@ const TasksList = ({ Tasks, Length }) => {
         <Modal
           visible={selected}
           onRequestClose={() => setIsSelected(!selected)}
-          animationType='fade'
-          transparent={true}>
+          animationType="fade"
+          transparent={true}
+        >
           <More
             moreText={todoTitle}
             hideModal={() => setIsSelected(!selected)}
