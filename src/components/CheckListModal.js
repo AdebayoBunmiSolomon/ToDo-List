@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { View, Text, TouchableOpacity, SafeAreaView } from "react-native";
 import Icon from "react-native-vector-icons/AntDesign";
 import TasksList from "./TasksList";
-import { Spinner, NativeBaseProvider, HStack } from "native-base";
+import { Spinner, HStack } from "native-base";
 
 const CheckListModal = (props) => {
   const [todoData, setTodoData] = useState();
@@ -42,11 +42,9 @@ const CheckListModal = (props) => {
       <View>
         {taskLoading === false ? (
           <View className='mt-[80%]'>
-            <NativeBaseProvider>
-              <HStack justifyContent='center'>
-                <Spinner color='warning.500' size='lg' />
-              </HStack>
-            </NativeBaseProvider>
+            <HStack justifyContent='center'>
+              <Spinner color='warning.500' size='lg' />
+            </HStack>
             <View className='flex flex-row justify-center mt-10'>
               <Text className='text-xl font-bold'>Please add a todo list</Text>
             </View>

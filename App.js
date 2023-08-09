@@ -3,7 +3,7 @@ import Splash from "./src/Pages/Splash";
 import ToDo from "./src/Pages/ToDo";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { SSRProvider } from "@react-aria/ssr";
+import { NativeBaseProvider } from "native-base";
 
 const Stack = createNativeStackNavigator();
 
@@ -37,10 +37,10 @@ const StackNavigator = () => {
 
 export default function App() {
   return (
-    <SSRProvider>
-      <NavigationContainer>
+    <NavigationContainer>
+      <NativeBaseProvider>
         <StackNavigator />
-      </NavigationContainer>
-    </SSRProvider>
+      </NativeBaseProvider>
+    </NavigationContainer>
   );
 }

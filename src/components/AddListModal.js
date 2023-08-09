@@ -14,6 +14,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const AddListModal = (props) => {
   const [listName, setListName] = useState("");
+  const date = Date();
   const backGroundColors = [
     "#FFCA28",
     "#24A6D9",
@@ -30,11 +31,12 @@ const AddListModal = (props) => {
     {
       title: listName.toLocaleLowerCase().replace(/^\s+|\s+$/gm, ""),
       color: color,
+      date: date,
     },
   ];
 
   const addTodo = async () => {
-    //await AsyncStorage.clear();
+    //await AsyncStorage.removeItem("todo");
 
     //get todo data if exist and create todo
     const getTodo = await AsyncStorage.getItem("todo");
@@ -75,6 +77,7 @@ const AddListModal = (props) => {
               Keyboard.dismiss();
               console.log("List name already exists");
               setListName("");
+              console.log(date.toLocaleUpperCase());
               return i;
             }
           }
@@ -82,6 +85,7 @@ const AddListModal = (props) => {
           getTodoDataFormat.push({
             color: color,
             title: listName.toLocaleLowerCase().replace(/^\s+|\s+$/gm, ""),
+            date: date,
           });
           //clear storage array object and add new todo array object to storage
           await AsyncStorage.setItem("todo", JSON.stringify(getTodoDataFormat));

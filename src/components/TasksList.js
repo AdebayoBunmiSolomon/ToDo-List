@@ -37,7 +37,8 @@ const TasksList = ({ Tasks, Length }) => {
     for (i = 0; i < todoTitle.length; i++) {
       if (todoTitle[i] === selectedTodoTitle) {
         indexOfTodoTitle = getTodoDataFormat.indexOf(getTodoData[i]);
-        console.log(indexOfTodoTitle);
+        copyOfGottenData = getTodoDataFormat.slice(indexOfTodoTitle);
+        //console.log(copyOfGottenData);
         // copyOfGottenData = getTodoDataFormat.slice(todoTitle[i]);
         return i;
       }
@@ -110,12 +111,23 @@ const TasksList = ({ Tasks, Length }) => {
                       </Text>
                     </TouchableOpacity>
                   </View>
-                  <View>
-                    <Text
-                      className='pt-5 text-[20px] font-medium pl-2'
-                      style={[{ color: "white" }]}>
-                      {truncateText(String(item.title))}
-                    </Text>
+                  <View className='flex flex-col space-y-1'>
+                    <View>
+                      <Text
+                        className='pt-3 text-[20px] font-medium pl-2'
+                        style={[{ color: "white" }]}>
+                        {truncateText(String(item.title))}
+                      </Text>
+                    </View>
+                    <View className='flex flex-row ml-[20%] pt-1'>
+                      <Text className='text-[12px] font-extrabold text-slate-200'>
+                        Created:
+                      </Text>
+                      <Text className='text-[10px] font-medium text-white pt-[1.5px]'>
+                        {" "}
+                        {item.date}
+                      </Text>
+                    </View>
                   </View>
                 </TouchableOpacity>
               </Swipeable>
