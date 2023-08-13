@@ -77,7 +77,7 @@ const TasksList = ({ Tasks, Length }) => {
     const renderLeftActions = (progress, dragX, onClick) => {
       return (
         <TouchableOpacity onPress={onClick}>
-          <View className="justify-center items-center bg-red-400 w-[100px] mt-3 h-20 rounded-lg">
+          <View className="justify-center items-center bg-red-400 w-[100px] mt-1 h-20 rounded-lg">
             <Animated.Text className="text-white text-sm font-bold">
               Delete
             </Animated.Text>
@@ -98,7 +98,7 @@ const TasksList = ({ Tasks, Length }) => {
           rightOpenValue={-100}
         >
           <TouchableOpacity
-            className="flex flex-row pt-2 mt-3 h-20 rounded-xl"
+            className="flex flex-row pt-2 mt-1 h-20 rounded-xl"
             style={[{ backgroundColor: item.color }]}
             onPress={(e) => {
               e.preventDefault();
@@ -141,12 +141,12 @@ const TasksList = ({ Tasks, Length }) => {
 
   return (
     <View>
-      <View className="ml-2 ">
-        <Text className="font-bold text-xl text-black">
+      <View className="ml-2 mt-4">
+        <Text className="font-bold text-sm text-black">
           Total todo: {todoLength}
         </Text>
       </View>
-      <View className="h-[650px] w-[95vw] mt-2 ml-2">
+      <View className="h-[650px] w-[95vw] ml-2">
         <FlatList
           renderScrollComponent={false}
           data={todoData}

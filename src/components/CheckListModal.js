@@ -32,13 +32,17 @@ const CheckListModal = (props) => {
 
   return (
     <SafeAreaView className="flex-1">
-      <Text className="pl-2 font-bold text-2xl text-slate-400">
-        Check List modal
-      </Text>
-      <View className="flex flex-row justify-end pr-2">
-        <TouchableOpacity onPress={props.closeModal}>
-          <Icon name="close" size={24} />
-        </TouchableOpacity>
+      <View className="flex flex-row justify-between">
+        <View>
+          <Text className="pl-2 font-bold text-2xl text-slate-400">
+            Check list
+          </Text>
+        </View>
+        <View className="pr-2">
+          <TouchableOpacity onPress={props.closeModal}>
+            <Icon name="close" size={24} />
+          </TouchableOpacity>
+        </View>
       </View>
       <View>
         {taskLoading === false ? (

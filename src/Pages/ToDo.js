@@ -10,6 +10,7 @@ import SettingsModal from "../components/SettingsModal";
 
 const ToDo = () => {
   const [name, setName] = useState("");
+  const [newName, setNewName] = useState("");
 
   const [addTodoVisible, setAddTodoVisible] = useState(false);
   const [checkListVisible, setCheckListVisible] = useState(false);
@@ -43,6 +44,7 @@ const ToDo = () => {
       userImage = parsedUserData.userImage;
       setName(userName);
       setImage(userImage);
+      setNewName(name);
     }
   };
 

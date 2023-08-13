@@ -44,20 +44,20 @@ const Splash = ({ navigation }) => {
     return () => clearInterval(timer);
   });
   return (
-    <View className='flex-1 flex-coL space-y-2 justify-center items-center bg-amber-400'>
+    <View className="flex-1 flex-coL space-y-2 justify-center items-center bg-amber-400">
       <View>
         <Text className={` ${imgClass} duration-700`}>
-          <Icon name='notebook-plus' size={100} />
+          <Icon name="notebook-plus" size={100} />
         </Text>
       </View>
       <View>
-        <Text className='text-white font-medium text-3xl'>
-          TO-DO <Text className='text-slate-400'>MeApp</Text>
+        <Text className="text-white font-medium text-3xl">
+          TO-DO <Text className="text-slate-400">MeApp</Text>
         </Text>
       </View>
       <View>
-        <Text className='text-white font-medium text-sm italic'>
-          <Text className='text-slate-400'>Be on track,</Text> with me!!!
+        <Text className="text-white font-medium text-sm italic">
+          <Text className="text-slate-400">Be on track,</Text> with me!!!
         </Text>
       </View>
     </View>
