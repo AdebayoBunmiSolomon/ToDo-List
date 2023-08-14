@@ -22,6 +22,8 @@ const TasksList = ({ Tasks, Length }) => {
   const [todoTitle, setIsTodoTitle] = useState("");
   const [itemColor, setItemColor] = useState("");
 
+  const date = Date();
+
   //For setting todo data used for swipeable
   const [todoData, setTodoData] = useState();
   const [todoLength, setTodoLength] = useState();
@@ -77,8 +79,8 @@ const TasksList = ({ Tasks, Length }) => {
     const renderLeftActions = (progress, dragX, onClick) => {
       return (
         <TouchableOpacity onPress={onClick}>
-          <View className="justify-center items-center bg-red-400 w-[100px] mt-1 h-20 rounded-lg">
-            <Animated.Text className="text-white text-sm font-bold">
+          <View className='justify-center items-center bg-red-400 w-[100px] mt-1 h-20 rounded-lg'>
+            <Animated.Text className='text-white text-sm font-bold'>
               Delete
             </Animated.Text>
           </View>
@@ -95,39 +97,36 @@ const TasksList = ({ Tasks, Length }) => {
           }
           onSwipeableOpen={() => closeRow(index)}
           ref={(ref) => (row[index] = ref)}
-          rightOpenValue={-100}
-        >
+          rightOpenValue={-100}>
           <TouchableOpacity
-            className="flex flex-row pt-2 mt-1 h-20 rounded-xl"
+            className='flex flex-row pt-2 mt-1 h-20 rounded-xl'
             style={[{ backgroundColor: item.color }]}
             onPress={(e) => {
               e.preventDefault();
               setIsTodoTitle(String(item.title));
               setItemColor(String(item.color));
               setIsSelected(true);
-            }}
-          >
+            }}>
             <View>
-              <TouchableOpacity className="h-10 w-10 rounded-lg justify-center items-center bg-slate-50 ml-2 mt-3">
+              <TouchableOpacity className='h-10 w-10 rounded-lg justify-center items-center bg-slate-50 ml-2 mt-3'>
                 <Text style={[{ color: item.color }]}>
-                  <Icon name="notebook-minus" size={32} />
+                  <Icon name='notebook-minus' size={32} />
                 </Text>
               </TouchableOpacity>
             </View>
-            <View className="flex flex-col space-y-1">
+            <View className='flex flex-col space-y-1'>
               <View>
                 <Text
-                  className="pt-3 text-[20px] font-medium pl-2"
-                  style={[{ color: "white" }]}
-                >
+                  className='pt-3 text-[20px] font-medium pl-2'
+                  style={[{ color: "white" }]}>
                   {truncateText(String(item.title))}
                 </Text>
               </View>
-              <View className="flex flex-row ml-[20%] pt-1">
-                <Text className="text-[12px] font-extrabold text-slate-200">
+              <View className='flex flex-row ml-[20%] pt-1'>
+                <Text className='text-[12px] font-extrabold text-slate-200'>
                   Created:
                 </Text>
-                <Text className="text-[10px] font-medium text-white pt-[1.5px]">
+                <Text className='text-[10px] font-medium text-white pt-[1.5px]'>
                   {" "}
                   {item.date}
                 </Text>
@@ -141,16 +140,20 @@ const TasksList = ({ Tasks, Length }) => {
 
   return (
     <View>
-      <View className="ml-2 mt-4">
-        <Text className="font-bold text-sm text-black">
+      <View className='ml-2 mt-4'>
+        <Text className='font-bold text-sm text-black'>
           Total todo: {todoLength}
         </Text>
       </View>
-      <View className="h-[650px] w-[95vw] ml-2">
+      <View className='h-[650px] w-[95vw] ml-2'>
         <FlatList
           renderScrollComponent={false}
-          data={todoData}
-          keyExtractor={(item) => item.title}
+          data={
+            todoData &&
+            todoData.sort((a, b) => Date.parse(b.date) - Date.parse(a.date))
+          }
+          //data={todoData.sort((a, b) => a.title.localeCompare(b.title))}
+          keyExtractor={(item) => item.date}
           renderItem={(item) =>
             renderItem(item, () => {
               console.log("Pressed", item);
@@ -163,9 +166,8 @@ const TasksList = ({ Tasks, Length }) => {
         <Modal
           visible={selected}
           onRequestClose={() => setIsSelected(!selected)}
-          animationType="fade"
-          transparent={true}
-        >
+          animationType='fade'
+          transparent={true}>
           <More
             moreText={todoTitle}
             hideModal={() => setIsSelected(!selected)}

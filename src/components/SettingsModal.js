@@ -77,21 +77,54 @@ const SettingsModal = (props) => {
     };
     //console.log(userData);
     await AsyncStorage.setItem("userData", JSON.stringify(userData));
-    Alert.alert("General Settings", "User changed successfully", [
-      {
-        text: "Ok",
-        onPress: () => console.log("Ok pressed"),
-      },
-      {
-        text: "Close",
-        onPress: () => console.log("Close pressed"),
-      },
-    ]);
+    Alert.alert(
+      "General Settings",
+      "User data changed successfully. Restart app to see changes",
+      [
+        {
+          text: "Ok",
+          onPress: () => console.log("Ok pressed"),
+        },
+        {
+          text: "Close",
+          onPress: () => console.log("Close pressed"),
+        },
+      ]
+    );
   };
 
-  const resetToDefault = async () => {
-    DevSettings.reload();
-    //await AsyncStorage.clear();
+  const resetAppToDefault = async () => {
+    Alert.alert(
+      "Program settings",
+      "Please note that initiating this process will clear all app data, and app will restart.",
+      [
+        {
+          text: "Continue".toLocaleLowerCase(),
+          onPress: async () => {
+            await AsyncStorage.clear();
+            DevSettings.reload();
+            Alert.alert(
+              "Program settings",
+              "Reset successful. App will restart now",
+              [
+                {
+                  text: "Ok".toLocaleLowerCase(),
+                  onPress: () => {
+                    console.log("Ok pressed");
+                  },
+                },
+              ]
+            );
+          },
+        },
+        {
+          text: "Abort".toLocaleLowerCase(),
+          onPress: () => {
+            console.log("Abort pressed");
+          },
+        },
+      ]
+    );
   };
 
   const changeTheme = async () => {};
@@ -142,53 +175,51 @@ const SettingsModal = (props) => {
   }, []);
 
   return (
-    <SafeAreaView className="flex-1">
-      <View className="flex flex-row justify-between bg-amber-400">
-        <View className="pt-1 pl-2">
-          <Text className="font-bold text-2xl text-white">Settings</Text>
+    <SafeAreaView className='flex-1'>
+      <View className='flex flex-row justify-between bg-amber-400'>
+        <View className='pt-1 pl-2'>
+          <Text className='font-bold text-2xl text-white'>Settings</Text>
         </View>
-        <View className="pt-2 pr-2">
+        <View className='pt-2 pr-2'>
           <TouchableOpacity
             onPress={props.closeModal}
-            className="w-10 h-10 justify-center items-center bg-white rounded-full"
-          >
-            <Text className="text-black">
-              <Icon name="close" size={20} />
+            className='w-10 h-10 justify-center items-center bg-white rounded-full'>
+            <Text className='text-black'>
+              <Icon name='close' size={20} />
             </Text>
           </TouchableOpacity>
         </View>
       </View>
       {isLoading === true ? (
-        <View className="mt-[80%]">
-          <HStack justifyContent="center">
-            <Spinner color="warning.500" size="lg" />
+        <View className='mt-[80%]'>
+          <HStack justifyContent='center'>
+            <Spinner color='warning.500' size='lg' />
           </HStack>
-          <View className="flex flex-row justify-center mt-10">
-            <Text className="text-xl font-bold">Loading, please wait</Text>
+          <View className='flex flex-row justify-center mt-10'>
+            <Text className='text-xl font-bold'>Loading, please wait</Text>
           </View>
         </View>
       ) : (
         <ScrollView style={styles.scrollView}>
-          <View className="h-[280px] bg-amber-400 rounded-bl-[70px] rounded-br-[70px]">
-            <View className="flex flex-row justify-center mt-5">
+          <View className='h-[280px] bg-amber-400 rounded-bl-[70px] rounded-br-[70px]'>
+            <View className='flex flex-row justify-center mt-5'>
               {settings.imageUri === null ? (
                 <Image
                   source={Images.img4}
-                  className="h-[150px] w-[150px] rounded-full"
+                  className='h-[150px] w-[150px] rounded-full'
                 />
               ) : (
                 <Image
                   source={{ uri: settings.imageUri }}
-                  className="h-[150px] w-[150px] rounded-full"
+                  className='h-[150px] w-[150px] rounded-full'
                 />
               )}
             </View>
-            <View className="flex flex-row justify-center mt-5">
+            <View className='flex flex-row justify-center mt-5'>
               <TouchableOpacity
-                className="bg-white h-11 w-[40%] rounded-lg duration-500 justify-center items-center"
-                onPress={pickImage}
-              >
-                <Text className="text-sm font-bold text-slate-400">
+                className='bg-white h-11 w-[40%] rounded-lg duration-500 justify-center items-center'
+                onPress={pickImage}>
+                <Text className='text-sm font-bold text-slate-400'>
                   Change avatar
                 </Text>
               </TouchableOpacity>
@@ -196,42 +227,41 @@ const SettingsModal = (props) => {
           </View>
 
           <View>
-            <Text className="text-[15px] font-bold mt-3 pl-4">
+            <Text className='text-[15px] font-bold mt-3 pl-4'>
               General / User settings
             </Text>
-            <View className="bg-slate-300 h-[150px] w-[330px] m-auto rounded-lg">
+            <View className='bg-slate-300 h-[150px] w-[330px] m-auto rounded-lg'>
               {/*Username input */}
 
-              <Text className="ml-[12px] text-[12px] font-medium mt-3">
+              <Text className='ml-[12px] text-[12px] font-medium mt-3'>
                 change username
               </Text>
-              <View className="flex flex-row justify-between">
+              <View className='flex flex-row justify-between'>
                 <View>
                   <TextInput
                     value={name}
                     onChangeText={(name) => setName(name)}
-                    className="bg-white w-[245px] h-10 border border-slate-300 rounded-md pl-2 pr-3 shadow-sm focus:outline-none focus:border-amber-400 focus:ring-amber-400 focus:ring-1 sm:text-sm ml-2"
+                    className='bg-white w-[245px] h-10 border border-slate-300 rounded-md pl-2 pr-3 shadow-sm focus:outline-none focus:border-amber-400 focus:ring-amber-400 focus:ring-1 sm:text-sm ml-2'
                   />
                 </View>
                 <View>
                   <TouchableOpacity
-                    className="h-10 w-16 bg-amber-400 rounded-lg justify-center items-center mr-2"
-                    onPress={changeUserName}
-                  >
-                    <Text className="text-black">
-                      <UserIcon name="user-edit" size={20} />
+                    className='h-10 w-16 bg-amber-400 rounded-lg justify-center items-center mr-2'
+                    onPress={changeUserName}>
+                    <Text className='text-black'>
+                      <UserIcon name='user-edit' size={20} />
                     </Text>
                   </TouchableOpacity>
                 </View>
               </View>
               {/*Message header input */}
-              <Text className="ml-[12px] text-[12px] font-medium mt-2">
+              <Text className='ml-[12px] text-[12px] font-medium mt-2'>
                 click to change theme [dark / light]
               </Text>
-              <View className="flex flex-row justify-center">
+              <View className='flex flex-row justify-center'>
                 <View>
-                  <TouchableOpacity className="h-10 w-[310px] bg-amber-400 rounded-lg justify-center items-center">
-                    <Text className="text-black text-sm font-medium">
+                  <TouchableOpacity className='h-10 w-[310px] bg-amber-400 rounded-lg justify-center items-center'>
+                    <Text className='text-black text-sm font-medium'>
                       Change theme&nbsp;&nbsp;&nbsp;{" "}
                       <ModeIcon name={themeIcon} size={20} />
                     </Text>
@@ -243,34 +273,32 @@ const SettingsModal = (props) => {
 
           {/*Program settings */}
           <View>
-            <Text className="text-[15px] font-bold mt-3 pl-4">
+            <Text className='text-[15px] font-bold mt-3 pl-4'>
               Program settings
             </Text>
-            <View className="bg-slate-300 h-[150px] w-[330px] m-auto rounded-lg">
+            <View className='bg-slate-300 h-[150px] w-[330px] m-auto rounded-lg'>
               {/*Clear all todo */}
-              <View className="flex flex-row justify-center mt-7">
+              <View className='flex flex-row justify-center mt-7'>
                 <View>
                   <TouchableOpacity
-                    className="h-10 w-[310px] bg-amber-400 rounded-lg justify-center items-center"
-                    onPress={clearAllTodo}
-                  >
-                    <Text className="text-black text-sm font-medium">
+                    className='h-10 w-[310px] bg-amber-400 rounded-lg justify-center items-center'
+                    onPress={clearAllTodo}>
+                    <Text className='text-black text-sm font-medium'>
                       Clear all todo&nbsp;&nbsp;&nbsp;{" "}
-                      <ClearAllTodo name="delete" size={20} />
+                      <ClearAllTodo name='delete' size={20} />
                     </Text>
                   </TouchableOpacity>
                 </View>
               </View>
               {/*Message header input */}
-              <View className="flex flex-row justify-center mt-3">
+              <View className='flex flex-row justify-center mt-3'>
                 <View>
                   <TouchableOpacity
-                    className="h-10 w-[310px] bg-amber-400 rounded-lg justify-center items-center"
-                    onPress={resetToDefault}
-                  >
-                    <Text className="text-black text-sm font-medium">
+                    className='h-10 w-[310px] bg-amber-400 rounded-lg justify-center items-center'
+                    onPress={resetAppToDefault}>
+                    <Text className='text-black text-sm font-medium'>
                       Reset app to default&nbsp;&nbsp;&nbsp;{" "}
-                      <ClearAllTodo name="sync" size={20} />
+                      <ClearAllTodo name='sync' size={20} />
                     </Text>
                   </TouchableOpacity>
                 </View>
