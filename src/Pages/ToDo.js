@@ -15,7 +15,6 @@ import FeatherIcon from "react-native-vector-icons/Feather";
 import AddListModal from "../components/AddListModal";
 import CheckListModal from "../components/CheckListModal";
 import SettingsModal from "../components/SettingsModal";
-//import RNExitApp from "react-native-exit-app";
 
 const ToDo = () => {
   const [name, setName] = useState("");

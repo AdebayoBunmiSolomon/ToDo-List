@@ -15,7 +15,6 @@ import ClearAllTodo from "react-native-vector-icons/AntDesign";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useEffect } from "react";
 import Images from "../Images/Images";
-import { Spinner, HStack } from "native-base";
 import { TextInput } from "react-native-gesture-handler";
 import { Alert } from "react-native";
 import * as ImagePicker from "expo-image-picker";

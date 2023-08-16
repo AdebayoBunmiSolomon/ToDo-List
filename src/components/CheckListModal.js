@@ -9,7 +9,6 @@ import {
 } from "react-native";
 import Icon from "react-native-vector-icons/AntDesign";
 import TasksList from "./TasksList";
-import { Spinner, HStack } from "native-base";
 import Loader from "./Loader";
 
 const CheckListModal = (props) => {
