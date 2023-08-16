@@ -20,6 +20,7 @@ import { TextInput } from "react-native-gesture-handler";
 import { Alert } from "react-native";
 import * as ImagePicker from "expo-image-picker";
 import { DevSettings } from "react-native";
+import Loader from "./Loader";
 
 const SettingsModal = (props) => {
   const [isLoading, setIsLoading] = useState(true);
@@ -127,7 +128,16 @@ const SettingsModal = (props) => {
     );
   };
 
-  const changeTheme = async () => {};
+  const changeTheme = async () => {
+    Alert.alert("Info", "Coming soon to your screens", [
+      {
+        text: "Ok",
+        onPress: () => {
+          console.log("Ok Pressed");
+        },
+      },
+    ]);
+  };
 
   const clearAllTodo = () => {
     Alert.alert(
@@ -191,14 +201,7 @@ const SettingsModal = (props) => {
         </View>
       </View>
       {isLoading === true ? (
-        <View className='mt-[80%]'>
-          <HStack justifyContent='center'>
-            <Spinner color='warning.500' size='lg' />
-          </HStack>
-          <View className='flex flex-row justify-center mt-10'>
-            <Text className='text-xl font-bold'>Loading, please wait</Text>
-          </View>
-        </View>
+        <Loader loaderText={"Please hold on a moment"} />
       ) : (
         <ScrollView style={styles.scrollView}>
           <View className='h-[280px] bg-amber-400 rounded-bl-[70px] rounded-br-[70px]'>
@@ -260,7 +263,9 @@ const SettingsModal = (props) => {
               </Text>
               <View className='flex flex-row justify-center'>
                 <View>
-                  <TouchableOpacity className='h-10 w-[310px] bg-amber-400 rounded-lg justify-center items-center'>
+                  <TouchableOpacity
+                    className='h-10 w-[310px] bg-amber-400 rounded-lg justify-center items-center'
+                    onPress={changeTheme}>
                     <Text className='text-black text-sm font-medium'>
                       Change theme&nbsp;&nbsp;&nbsp;{" "}
                       <ModeIcon name={themeIcon} size={20} />

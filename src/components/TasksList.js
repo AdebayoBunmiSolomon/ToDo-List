@@ -123,7 +123,7 @@ const TasksList = ({ Tasks, Length }) => {
                 </Text>
               </View>
               <View className='flex flex-row ml-[20%] pt-1'>
-                <Text className='text-[12px] font-extrabold text-slate-200'>
+                <Text className='text-[12px] font-extrabold text-slate-100'>
                   Created:
                 </Text>
                 <Text className='text-[10px] font-medium text-white pt-[1.5px]'>

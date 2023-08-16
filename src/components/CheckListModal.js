@@ -1,9 +1,16 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import React, { useEffect, useState } from "react";
-import { View, Text, TouchableOpacity, SafeAreaView } from "react-native";
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  SafeAreaView,
+  ActivityIndicator,
+} from "react-native";
 import Icon from "react-native-vector-icons/AntDesign";
 import TasksList from "./TasksList";
 import { Spinner, HStack } from "native-base";
+import Loader from "./Loader";
 
 const CheckListModal = (props) => {
   const [todoData, setTodoData] = useState();
@@ -31,29 +38,22 @@ const CheckListModal = (props) => {
   }, []);
 
   return (
-    <SafeAreaView className="flex-1">
-      <View className="flex flex-row justify-between">
+    <SafeAreaView className='flex-1'>
+      <View className='flex flex-row justify-between'>
         <View>
-          <Text className="pl-2 font-bold text-2xl text-slate-400">
+          <Text className='pl-2 font-bold text-2xl text-slate-400'>
             Check list
           </Text>
         </View>
-        <View className="pr-2">
+        <View className='pr-2'>
           <TouchableOpacity onPress={props.closeModal}>
-            <Icon name="close" size={24} />
+            <Icon name='close' size={24} />
           </TouchableOpacity>
         </View>
       </View>
       <View>
         {taskLoading === false ? (
-          <View className="mt-[80%]">
-            <HStack justifyContent="center">
-              <Spinner color="warning.500" size="lg" />
-            </HStack>
-            <View className="flex flex-row justify-center mt-10">
-              <Text className="text-xl font-bold">Please add a todo list</Text>
-            </View>
-          </View>
+          <Loader loaderText={"Please add a todo list"} />
         ) : (
           <TasksList Tasks={todoData} Length={todoLength} />
         )}
