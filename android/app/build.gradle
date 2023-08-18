@@ -113,13 +113,13 @@ android {
 
     compileSdkVersion rootProject.ext.compileSdkVersion
 
-    namespace "com.todolistmain"
+    namespace 'com.anonymous.todolist_main'
     defaultConfig {
-        applicationId "com.todolistmain"
+        applicationId 'com.anonymous.todolist_main'
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
-        versionName "1.0"
+        versionName "1.0.0"
     }
 
     splits {

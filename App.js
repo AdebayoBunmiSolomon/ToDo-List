@@ -35,10 +35,6 @@ const StackNavigator = () => {
 };
 
 export default function App() {
-  const config = {
-    strictMode: "off",
-  };
-
   return (
     <NavigationContainer>
       <StackNavigator />

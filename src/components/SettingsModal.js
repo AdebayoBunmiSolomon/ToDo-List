@@ -3,11 +3,11 @@ import {
   View,
   Text,
   TouchableOpacity,
-  SafeAreaView,
   ScrollView,
   StyleSheet,
   Image,
 } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 import UserIcon from "react-native-vector-icons/FontAwesome5";
 import Icon from "react-native-vector-icons/AntDesign";
 import ModeIcon from "react-native-vector-icons/Ionicons";

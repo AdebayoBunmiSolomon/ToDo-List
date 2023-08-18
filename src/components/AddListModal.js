@@ -6,11 +6,11 @@ import {
   KeyboardAvoidingView,
   TextInput,
   Alert,
-  SafeAreaView,
   Keyboard,
 } from "react-native";
 import Icon from "react-native-vector-icons/AntDesign";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 const AddListModal = (props) => {
   const [listName, setListName] = useState("");
