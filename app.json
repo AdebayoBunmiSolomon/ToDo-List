@@ -1,5 +1,13 @@
 {
   "expo": {
+    "plugins": [
+      [
+        "expo-notifications",
+        {
+          "sounds": ["./assets/notify_sound.wav"]
+        }
+      ]
+    ],
     "name": "MeTodo",
     "slug": "MeTodo",
     "version": "1.0.0",
@@ -10,9 +18,7 @@
       "resizeMode": "cover",
       "backgroundColor": "#F4C400"
     },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
+    "assetBundlePatterns": ["**/*"],
     "ios": {
       "supportsTablet": true
     },

@@ -6,8 +6,9 @@ import {
   ScrollView,
   StyleSheet,
   Image,
+  SafeAreaView,
 } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
+//import { SafeAreaView } from "react-native-safe-area-context";
 import UserIcon from "react-native-vector-icons/FontAwesome5";
 import Icon from "react-native-vector-icons/AntDesign";
 import ModeIcon from "react-native-vector-icons/Ionicons";
@@ -232,7 +233,7 @@ const SettingsModal = (props) => {
             <Text className='text-[15px] font-bold mt-3 pl-4'>
               General / User settings
             </Text>
-            <View className='bg-slate-300 h-[150px] w-[330px] m-auto rounded-lg'>
+            <View className='bg-slate-300 h-[150px] w-[91.5vw] rounded-lg ml-4'>
               {/*Username input */}
 
               <Text className='ml-[12px] text-[12px] font-medium mt-3'>
@@ -243,7 +244,7 @@ const SettingsModal = (props) => {
                   <TextInput
                     value={name}
                     onChangeText={(name) => setName(name)}
-                    className='bg-white w-[245px] h-10 border border-slate-300 rounded-md pl-2 pr-3 shadow-sm focus:outline-none focus:border-amber-400 focus:ring-amber-400 focus:ring-1 sm:text-sm ml-2'
+                    className='bg-white w-[69vw] h-10 border border-slate-300 rounded-md pl-2 pr-3 shadow-sm focus:outline-none focus:border-amber-400 focus:ring-amber-400 focus:ring-1 sm:text-sm ml-2'
                   />
                 </View>
                 <View>
@@ -263,7 +264,7 @@ const SettingsModal = (props) => {
               <View className='flex flex-row justify-center'>
                 <View>
                   <TouchableOpacity
-                    className='h-10 w-[310px] bg-amber-400 rounded-lg justify-center items-center'
+                    className='h-10 w-[85vw] bg-amber-400 rounded-lg justify-center items-center'
                     onPress={changeTheme}>
                     <Text className='text-black text-sm font-medium'>
                       Change theme&nbsp;&nbsp;&nbsp;{" "}
@@ -280,12 +281,12 @@ const SettingsModal = (props) => {
             <Text className='text-[15px] font-bold mt-3 pl-4'>
               Program settings
             </Text>
-            <View className='bg-slate-300 h-[150px] w-[330px] m-auto rounded-lg'>
+            <View className='bg-slate-300 h-[150px]  w-[91.5vw] rounded-lg ml-4'>
               {/*Clear all todo */}
               <View className='flex flex-row justify-center mt-7'>
                 <View>
                   <TouchableOpacity
-                    className='h-10 w-[310px] bg-amber-400 rounded-lg justify-center items-center'
+                    className='h-10 w-[85vw] bg-amber-400 rounded-lg justify-center items-center'
                     onPress={clearAllTodo}>
                     <Text className='text-black text-sm font-medium'>
                       Clear all todo&nbsp;&nbsp;&nbsp;{" "}
@@ -298,7 +299,7 @@ const SettingsModal = (props) => {
               <View className='flex flex-row justify-center mt-3'>
                 <View>
                   <TouchableOpacity
-                    className='h-10 w-[310px] bg-amber-400 rounded-lg justify-center items-center'
+                    className='h-10 w-[85vw] bg-amber-400 rounded-lg justify-center items-center'
                     onPress={resetAppToDefault}>
                     <Text className='text-black text-sm font-medium'>
                       Reset app to default&nbsp;&nbsp;&nbsp;{" "}
