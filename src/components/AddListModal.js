@@ -269,7 +269,7 @@ const AddListModal = (props) => {
               />
             </View>
           </View>
-          <View className='flex flex-row justify-center space-x-3+ mt-4'>
+          <View className='flex flex-row justify-center space-x-3 mt-4'>
             {backGroundColors.map((color) => (
               <TouchableOpacity
                 key={color}
