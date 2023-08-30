@@ -297,6 +297,9 @@ const AddListModal = (props) => {
             Note: use 24hrs for pm e.g. 04:00pm, use 16:0. {"\n"}
             Note: use 12hrs for am e.g. 08:00am, use 8:0. {"\n"}
             Note: Do not add 0 to single digit hrs or mins e.g. 08:01, use 8:1.
+            {"\n"}
+            FYI: Notification will only work if app is minimized or working in
+            background.
           </Text>
         </View>
       </KeyboardAvoidingView>
